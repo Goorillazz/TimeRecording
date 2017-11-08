@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,36 +9,42 @@ namespace DataReader
 {
     public class Reader
     {
-        private readonly IEnumerable<int> _ungültigeTasks;
+        private int[] _invalidTasks;        
 
-        private Reader(IEnumerable<int> ungültigeTasks)
-        {
-            _ungültigeTasks = ungültigeTasks;
+        private Reader(params int[] invalidTasks)
+        {            
+            _invalidTasks = invalidTasks;
         }
 
-        public static Reader CreateReader(string ungültigeTasks)
+        public static Reader CreateReader(params int[] invalidTasks)
+        {            
+            return new Reader(invalidTasks);
+        }
+        
+        public IEnumerable<(DateTime day, int minutes, int taskId, string taskName)> ReadAllLines(string path)
         {
-           return new Reader(ungültigeTasks.Split(',').Select(s => Convert.ToInt32(s)));
+            var lines = File.ReadAllLines(path).Skip(1);
+            return lines.Select(ReadData).Where(l => IsValid(l.taskId));
         }
 
-        public static (DateTime day, int minutes, int taskId, string taskName) ReadData(string line)
+        private (DateTime day, int minutes, int taskId, string taskName) ReadData(string line)
         {
             var words = line.Split(',').Select(w => w.Replace("\"", string.Empty));
 
-            var kalenderTag = NewMethod(words.ElementAt(0));
-            var minuten = Convert.ToInt32(words.ElementAt(1));
+            var calenderDay = GetCalenderDay(words.ElementAt(0));
+            var minutes = Convert.ToInt32(words.ElementAt(1));
             var taskID = Convert.ToInt32(words.ElementAt(2));
             var taskTitle = words.ElementAt(3);
 
-            return (kalenderTag, minuten, taskID, taskTitle);
+            return (calenderDay, minutes, taskID, taskTitle);
         }
 
-        public bool IstGültig(int taskId)
+        private bool IsValid(int taskId)
         {
-            return !_ungültigeTasks.Contains(taskId);
+            return !_invalidTasks.Contains(taskId);
         }
 
-        public static double GetDifferenz(DateTime day, int minutes)
+        public double GetDifferenz(DateTime day, int minutes)
         {
             if (day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday)
                 return minutes / 60.0;
@@ -45,16 +52,15 @@ namespace DataReader
             return minutes / 60.0 - 8.0;
         }
 
-        private static DateTime NewMethod(string datumStr)
+        private DateTime GetCalenderDay(string dateStr)
         {
-            var datum = datumStr.Split('.');
-            int jahr = Convert.ToInt32(datum.ElementAt(2).Substring(0, 4));
-            int monat = Convert.ToInt32(datum.ElementAt(1));
-            int tag = Convert.ToInt32(datum.ElementAt(0));
-            var kalenderTag = new DateTime(jahr, monat, tag);
-            return kalenderTag;
+            var date = dateStr.Split('.');
+            int year = Convert.ToInt32(date.ElementAt(2).Substring(0, 4));
+            int month = Convert.ToInt32(date.ElementAt(1));
+            int day = Convert.ToInt32(date.ElementAt(0));
+            return new DateTime(year, month, day);
         }
 
-        
+
     }
 }

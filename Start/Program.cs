@@ -9,10 +9,9 @@ namespace Start
     {
         static void Main(string[] args)
         {
-            var reader = Reader.CreateReader(Properties.Settings.Default.Ungültig);
+            var reader = Reader.CreateReader(Convert.ToInt32(Properties.Settings.Default.Ungültig));
             var path = Properties.Settings.Default.Path;
-            var lines = File.ReadAllLines(path).Skip(1);
-            var data = lines.Select(Reader.ReadData).Where(l => reader.IstGültig(l.taskId));
+            var data = reader.ReadAllLines(path);
 
             var tagesArbeitszeit = data.GroupBy(e => e.day);
 
@@ -29,7 +28,7 @@ namespace Start
                 var sdfsdf = item.FirstOrDefault();
 
                 var stunden = sum / 60.0;
-                var differenz = Reader.GetDifferenz(sdfsdf.day, sum);
+                var differenz = reader.GetDifferenz(sdfsdf.day, sum);
 
                 aktuellerStand += differenz;
 
