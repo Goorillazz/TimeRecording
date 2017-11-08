@@ -3,7 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="Path" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Users\Besitzer\Desktop\Zeitabrechnung\20171030_work_logs.csv</Value>
+      <Value Profile="(Default)">C:\Users\chrdrcur\Desktop\CSV\20171107_work_logs.csv</Value>
+    </Setting>
+    <Setting Name="Ungültig" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">17625</Value>
     </Setting>
   </Settings>
 </SettingsFile>

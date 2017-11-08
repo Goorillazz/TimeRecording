@@ -8,7 +8,17 @@ namespace DataReader
 {
     public class Reader
     {
+        private readonly IEnumerable<int> _ungültigeTasks;
 
+        private Reader(IEnumerable<int> ungültigeTasks)
+        {
+            _ungültigeTasks = ungültigeTasks;
+        }
+
+        public static Reader CreateReader(string ungültigeTasks)
+        {
+           return new Reader(ungültigeTasks.Split(',').Select(s => Convert.ToInt32(s)));
+        }
 
         public static (DateTime day, int minutes, int taskId, string taskName) ReadData(string line)
         {
@@ -22,6 +32,19 @@ namespace DataReader
             return (kalenderTag, minuten, taskID, taskTitle);
         }
 
+        public bool IstGültig(int taskId)
+        {
+            return !_ungültigeTasks.Contains(taskId);
+        }
+
+        public static double GetDifferenz(DateTime day, int minutes)
+        {
+            if (day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday)
+                return minutes / 60.0;
+
+            return minutes / 60.0 - 8.0;
+        }
+
         private static DateTime NewMethod(string datumStr)
         {
             var datum = datumStr.Split('.');
@@ -31,5 +54,7 @@ namespace DataReader
             var kalenderTag = new DateTime(jahr, monat, tag);
             return kalenderTag;
         }
+
+        
     }
 }

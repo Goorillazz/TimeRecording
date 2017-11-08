@@ -25,10 +25,19 @@ namespace Start.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Besitzer\\Desktop\\Zeitabrechnung\\20171030_work_logs.csv")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\chrdrcur\\Desktop\\CSV\\20171107_work_logs.csv")]
         public string Path {
             get {
                 return ((string)(this["Path"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("17625")]
+        public string Ungültig {
+            get {
+                return ((string)(this["Ungültig"]));
             }
         }
     }
