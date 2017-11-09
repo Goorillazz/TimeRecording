@@ -8,26 +8,14 @@ using System.Threading.Tasks;
 namespace DataReader
 {
     public class Reader
-    {
-        private int[] _invalidTasks;        
-
-        private Reader(params int[] invalidTasks)
-        {            
-            _invalidTasks = invalidTasks;
-        }
-
-        public static Reader CreateReader(params int[] invalidTasks)
-        {            
-            return new Reader(invalidTasks);
-        }
-        
-        public IEnumerable<(DateTime day, int minutes, int taskId, string taskName)> ReadAllLines(string path)
+    {        
+        public static IEnumerable<(DateTime day, int minutes, int taskId, string taskName)> ReadAllLines(string path)
         {
             var lines = File.ReadAllLines(path).Skip(1);
-            return lines.Select(ReadData).Where(l => IsValid(l.taskId));
+            return lines.Select(ReadData);
         }
 
-        private (DateTime day, int minutes, int taskId, string taskName) ReadData(string line)
+        private static (DateTime day, int minutes, int taskId, string taskName) ReadData(string line)
         {
             var words = line.Split(',').Select(w => w.Replace("\"", string.Empty));
 
@@ -39,20 +27,7 @@ namespace DataReader
             return (calenderDay, minutes, taskID, taskTitle);
         }
 
-        private bool IsValid(int taskId)
-        {
-            return !_invalidTasks.Contains(taskId);
-        }
-
-        public double GetDifferenz(DateTime day, int minutes)
-        {
-            if (day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday)
-                return minutes / 60.0;
-
-            return minutes / 60.0 - 8.0;
-        }
-
-        private DateTime GetCalenderDay(string dateStr)
+        private static DateTime GetCalenderDay(string dateStr)
         {
             var date = dateStr.Split('.');
             int year = Convert.ToInt32(date.ElementAt(2).Substring(0, 4));

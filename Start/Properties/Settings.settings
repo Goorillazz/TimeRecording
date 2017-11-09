@@ -5,7 +5,7 @@
     <Setting Name="Path" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Users\chrdrcur\Desktop\CSV\20171107_work_logs.csv</Value>
     </Setting>
-    <Setting Name="Ungültig" Type="System.String" Scope="Application">
+    <Setting Name="Invalid" Type="System.String" Scope="Application">
       <Value Profile="(Default)">17625</Value>
     </Setting>
   </Settings>

@@ -35,9 +35,9 @@ namespace Start.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("17625")]
-        public string Ungültig {
+        public string Invalid {
             get {
-                return ((string)(this["Ungültig"]));
+                return ((string)(this["Invalid"]));
             }
         }
     }

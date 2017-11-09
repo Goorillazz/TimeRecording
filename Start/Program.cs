@@ -9,35 +9,27 @@ namespace Start
     {
         static void Main(string[] args)
         {
-            var reader = Reader.CreateReader(Convert.ToInt32(Properties.Settings.Default.Ungültig));
-            var path = Properties.Settings.Default.Path;
-            var data = reader.ReadAllLines(path);
+            var data = Reader.ReadAllLines(Properties.Settings.Default.Path);
+            var dailyReport = Reporter.GetByDay(data, Validator);
+            double sum = 0;
 
-            var tagesArbeitszeit = data.GroupBy(e => e.day);
-
-            double aktuellerStand = 0;
-
-            foreach (var item in tagesArbeitszeit)
+            foreach (var item in dailyReport)
             {
-                int sum = 0;
-
-                foreach (var sdf in item)
-                {
-                    sum += sdf.minutes;
-                }
-                var sdfsdf = item.FirstOrDefault();
-
-                var stunden = sum / 60.0;
-                var differenz = reader.GetDifferenz(sdfsdf.day, sum);
-
-                aktuellerStand += differenz;
-
-                System.Console.WriteLine($"Am {sdfsdf.day.Day}.{sdfsdf.day.Month}.{sdfsdf.day.Year} wurden {stunden} gearbeitet. Differenz: {differenz}");
+                double difference = Reporter.GetDifference(item.day, item.minutes);
+                Console.WriteLine($"Am {item.day} wurden {item.minutes/60.0} gearbeitet. Differenz: {difference}");
+                sum += difference;
             }
+
             Console.WriteLine();
-            Console.WriteLine($"Insgesamt {aktuellerStand} Überstunden.");
-            System.Console.ReadLine();
+            Console.WriteLine($"Insgesamt {sum} Überstunden.");
+            Console.ReadLine();
         }
 
+        private static bool Validator(int arg)
+        {
+            var invalidTasks = Properties.Settings.Default.Invalid;
+            var invalidTasksIds = invalidTasks.Split(',').Select(_ => Convert.ToInt32(_));
+            return !invalidTasksIds.Contains(arg);
+        }
     }
 }
