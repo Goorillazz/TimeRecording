@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Start", "Start\Start.csproj", "{F43B40DB-237C-4FF7-9087-EA339E7C8904}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataReader", "DataReader\DataReader.csproj", "{EE25872A-06A8-486F-AE0D-EC021E602A93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{7FA4416A-750A-4BC4-89A0-284C14F98A77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EE25872A-06A8-486F-AE0D-EC021E602A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE25872A-06A8-486F-AE0D-EC021E602A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE25872A-06A8-486F-AE0D-EC021E602A93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA4416A-750A-4BC4-89A0-284C14F98A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA4416A-750A-4BC4-89A0-284C14F98A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA4416A-750A-4BC4-89A0-284C14F98A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA4416A-750A-4BC4-89A0-284C14F98A77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

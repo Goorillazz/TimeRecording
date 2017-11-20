@@ -14,7 +14,7 @@ namespace Start
             double sum = 0;
 
             foreach (var item in dailyReport)
-            {
+            {       
                 double difference = Reporter.GetDifference(item.day, item.minutes);
                 Console.WriteLine($"Am {item.day} wurden {item.minutes/60.0} gearbeitet. Differenz: {difference}");
                 sum += difference;

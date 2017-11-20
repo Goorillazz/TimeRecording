@@ -25,7 +25,7 @@ namespace Start.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\chrdrcur\\Desktop\\CSV\\20171107_work_logs.csv")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Besitzer\\Desktop\\20170830_work_logs.csv")]
         public string Path {
             get {
                 return ((string)(this["Path"]));
