@@ -120,6 +120,14 @@ namespace Data
             return false;
         }
 
+        public IEnumerable<(DateTime day, int taskId, int minutes)> ReadAllRecords()
+        {
+            foreach (var record in _recordTable)
+            {
+                yield return (record.Key.day, record.Key.taskId, record.Value);
+            }
+        }
+
         public bool Delete(DateTime day, int taskId)
         {
             (DateTime day, int taskId) key = (day, taskId);
@@ -154,6 +162,14 @@ namespace Data
             return false;
         }
 
+        public IEnumerable<(int taskId, string taskName)> ReadAllNames()
+        {
+            foreach (var name in _nameTable)
+            {
+                yield return (name.Key, name.Value);
+            }
+        }
+
         public bool Update(int taskId, string taskName)
         {
             if (!_nameTable.ContainsKey(taskId))
@@ -173,7 +189,7 @@ namespace Data
             _nameTable.Remove(taskId);
             return true;
         }
-
+           
         #endregion
 
     }
