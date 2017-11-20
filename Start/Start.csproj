@@ -66,6 +66,10 @@
       <Project>{ee25872a-06a8-486f-ae0d-ec021e602a93}</Project>
       <Name>DataReader</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{7fa4416a-750a-4bc4-89a0-284c14f98a77}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

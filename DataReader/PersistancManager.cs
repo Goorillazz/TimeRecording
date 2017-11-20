@@ -19,7 +19,7 @@ namespace DataReader
         {
             bool result = true;
             _iCRUD.Open();
-            foreach (var record in records)
+            foreach (var record in records.ToList())
             {
                 if (!_iCRUD.Update(record.taskId, record.taskName))
                     result = false;

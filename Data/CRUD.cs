@@ -12,8 +12,8 @@ namespace Data
     {
         Dictionary<int, string> _nameTable = new Dictionary<int, string>();
         Dictionary<(DateTime day, int taskId), int> _recordTable = new Dictionary<(DateTime day, int taskId), int>();
-        string _names = @"..\names.txt";
-        string _records = @"..\records.txt";
+        string _names = @"..\..\names.txt";
+        string _records = @"..\..\records.txt";
 
         public void Open()
         {

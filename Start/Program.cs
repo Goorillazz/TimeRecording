@@ -2,6 +2,7 @@
 using DataReader;
 using System.IO;
 using System.Linq;
+using Data;
 
 namespace Start
 {
@@ -9,7 +10,13 @@ namespace Start
     {
         static void Main(string[] args)
         {
-            var data = Reader.ReadAllLines(Properties.Settings.Default.Path);
+            var crud = new CRUD();
+            var importedData = Reader.ReadAllLines(Properties.Settings.Default.Path);
+
+            var persistanceManager = new PersistanceManager(crud);
+            persistanceManager.Update(importedData);
+            var data = persistanceManager.ReadAllRecords();
+
             var dailyReport = Reporter.GetByDay(data, Validator);
             double sum = 0;
 
